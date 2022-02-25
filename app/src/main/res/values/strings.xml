@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">PedraPapelTesouraFragments</string>
+    <string name="settings">Configurações</string>
+    <string name="escolha_a_sua_jogada">Escolha a sua jogada</string>
+    <string name="jogada_computador_01">Jogada Computador 01</string>
+    <string name="jogada_computador_02">Jogada Computador 02</string>
+    <string name="resultado">Resultado</string>
+    <string name="fechar">Fechar</string>
+    <string name="selecionar_nr_jogadores">Selecionar Número de Jogadores:</string>
+    <string name="_02_jogadores">02 Jogadores</string>
+    <string name="_03_jogadores">03 Jogadores</string>
+    <string name="selecionar_nr_jogadas">Selecionar Número de Jogadas:</string>
+    <string name="_01_jogo">01 Jogo</string>
+    <string name="_03_jogos">03 Jogos</string>
+    <string name="_05_jogos">05 Jogos</string>
+    <string name="salvar">Salvar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="todo">TODO</string>
+</resources>
