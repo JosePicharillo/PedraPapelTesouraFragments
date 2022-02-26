@@ -10,16 +10,11 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import br.edu.ifsp.pedrapapeltesourafragments.Opcoes
 import br.edu.ifsp.pedrapapeltesourafragments.R
-import br.edu.ifsp.pedrapapeltesourafragments.data.DatabaseHelper
-import br.edu.ifsp.pedrapapeltesourafragments.data.Settings
 import br.edu.ifsp.pedrapapeltesourafragments.options.OpcaoDoisJogadores
 import br.edu.ifsp.pedrapapeltesourafragments.options.OpcaoTresJogadores
 import java.util.*
 
 class MainFragment : Fragment() {
-
-    //val db = context?.let { DatabaseHelper(it) }
-    var list = ArrayList<Settings>()
 
     val op3 = OpcaoTresJogadores()
     val op2 = OpcaoDoisJogadores()
@@ -28,7 +23,6 @@ class MainFragment : Fragment() {
     var imgJogadaPC = -1
     var imgJogadaPC2 = -1
     var jogadorSelecionado = 3
-    var rodadasSelecionada = 1
 
     /**
      * Componentes View
@@ -40,15 +34,6 @@ class MainFragment : Fragment() {
     private lateinit var imgPlay01: ImageView
     private lateinit var imgPlay02: ImageView
     private lateinit var result: TextView
-
-//    init {
-//        db?.addSettingsPattern()
-//    }
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        db?.addSettingsPattern()
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -79,58 +64,50 @@ class MainFragment : Fragment() {
     }
 
     private fun startGame(jogada: Opcoes) {
-//        list = db?.infoSettings()!!
-//        for (item in list) {
-//            if (item.numJogador == 2) {
-            if (jogadorSelecionado == 2) {
-                val jogadaComputador01 = random.nextInt(3)
-                resultadoSB = op2.verificaJogoDoisJogadores(jogada, jogadaComputador01)
+        if (jogadorSelecionado == 2) {
+            val jogadaComputador01 = random.nextInt(3)
+            resultadoSB = op2.verificaJogoDoisJogadores(jogada, jogadaComputador01)
 
-                when (jogadaComputador01) {
-                    0 -> imgJogadaPC = R.mipmap.pedra
-                    1 -> imgJogadaPC = R.mipmap.papel
-                    2 -> imgJogadaPC = R.mipmap.tesoura
-                    else -> {}
-                }
-                result()
-            } else {
-                val jogadaComputador01 = random.nextInt(3)
-                val jogadaComputador02 = random.nextInt(3)
-                resultadoSB =
-                    op3.verificaJogoTresJogadores(jogada, jogadaComputador01, jogadaComputador02)
-
-                when (jogadaComputador01) {
-                    0 -> imgJogadaPC = R.mipmap.pedra
-                    1 -> imgJogadaPC = R.mipmap.papel
-                    2 -> imgJogadaPC = R.mipmap.tesoura
-                    else -> {}
-                }
-
-                when (jogadaComputador02) {
-                    0 -> imgJogadaPC2 = R.mipmap.pedra
-                    1 -> imgJogadaPC2 = R.mipmap.papel
-                    2 -> imgJogadaPC2 = R.mipmap.tesoura
-                    else -> {}
-                }
-                result()
+            when (jogadaComputador01) {
+                0 -> imgJogadaPC = R.mipmap.pedra
+                1 -> imgJogadaPC = R.mipmap.papel
+                2 -> imgJogadaPC = R.mipmap.tesoura
+                else -> {}
             }
-//        }
+            result()
+        } else {
+            val jogadaComputador01 = random.nextInt(3)
+            val jogadaComputador02 = random.nextInt(3)
+            resultadoSB =
+                op3.verificaJogoTresJogadores(jogada, jogadaComputador01, jogadaComputador02)
+
+            when (jogadaComputador01) {
+                0 -> imgJogadaPC = R.mipmap.pedra
+                1 -> imgJogadaPC = R.mipmap.papel
+                2 -> imgJogadaPC = R.mipmap.tesoura
+                else -> {}
+            }
+
+            when (jogadaComputador02) {
+                0 -> imgJogadaPC2 = R.mipmap.pedra
+                1 -> imgJogadaPC2 = R.mipmap.papel
+                2 -> imgJogadaPC2 = R.mipmap.tesoura
+                else -> {}
+            }
+            result()
+        }
 
     }
 
     private fun result() {
-//        list = db?.infoSettings()!!
-//        for (item in list) {
-//            if (item.numJogador == 2) {
-            if (jogadorSelecionado == 2) {
-                result.setText(resultadoSB.toString())
-                imgPlay01.setImageResource(imgJogadaPC)
-            } else {
-                result.setText(resultadoSB.toString())
-                imgPlay01.setImageResource(imgJogadaPC)
-                imgPlay02.setImageResource(imgJogadaPC2)
-            }
+        if (jogadorSelecionado == 2) {
+            result.setText(resultadoSB.toString())
+            imgPlay01.setImageResource(imgJogadaPC)
+        } else {
+            result.setText(resultadoSB.toString())
+            imgPlay01.setImageResource(imgJogadaPC)
+            imgPlay02.setImageResource(imgJogadaPC2)
         }
-//    }
+    }
 
 }

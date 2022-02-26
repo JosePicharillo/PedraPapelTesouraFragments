@@ -8,8 +8,6 @@ import android.widget.Button
 import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import br.edu.ifsp.pedrapapeltesourafragments.R
-import br.edu.ifsp.pedrapapeltesourafragments.data.DatabaseHelper
-import br.edu.ifsp.pedrapapeltesourafragments.data.Settings
 
 class SettingsFragment : Fragment() {
 
@@ -21,8 +19,6 @@ class SettingsFragment : Fragment() {
     private lateinit var radio01Game: RadioButton
     private lateinit var radio03Game: RadioButton
     private lateinit var radio05Game: RadioButton
-
-    val db = context?.let { DatabaseHelper(it) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,9 +50,6 @@ class SettingsFragment : Fragment() {
     fun saveSettings() {
         val jogadores = checkNumJogadores()
         val rodadas = checkNumRodadas()
-
-        val s = Settings(1, jogadores, rodadas)
-        db?.updateSettings(s)
     }
 
     fun checkNumJogadores(): Int {
