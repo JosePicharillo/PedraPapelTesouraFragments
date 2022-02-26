@@ -1,19 +1,17 @@
 package br.edu.ifsp.pedrapapeltesourafragments.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import br.edu.ifsp.pedrapapeltesourafragments.R
+import br.edu.ifsp.pedrapapeltesourafragments.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
 
-    private lateinit var root: View
-    private lateinit var btnSave: Button
-    private lateinit var btnCancel: Button
     private lateinit var radio02Jogador: RadioButton
     private lateinit var radio03Jogador: RadioButton
     private lateinit var radio01Game: RadioButton
@@ -25,31 +23,31 @@ class SettingsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        root = inflater.inflate(R.layout.fragment_settings, container, false)
 
-        btnSave = root.findViewById(R.id.btnSaveSettings)
-        btnCancel = root.findViewById(R.id.btnCancelSettings)
-        radio02Jogador = root.findViewById(R.id.op_dois)
-        radio03Jogador = root.findViewById(R.id.op_tres)
-        radio01Game = root.findViewById(R.id.op_uma_jogada)
-        radio03Game = root.findViewById(R.id.op_tres_jogada)
-        radio05Game = root.findViewById(R.id.op_cinco_jogada)
+        val fragmentSettingsBinding = FragmentSettingsBinding.inflate(inflater, container, false)
 
-        btnCancel.setOnClickListener {
+        radio02Jogador = fragmentSettingsBinding.opDois.findViewById(R.id.op_dois)
+        radio03Jogador = fragmentSettingsBinding.opTres.findViewById(R.id.op_tres)
+        radio01Game = fragmentSettingsBinding.opUmaJogada.findViewById(R.id.op_uma_jogada)
+        radio03Game = fragmentSettingsBinding.opTresJogada.findViewById(R.id.op_tres_jogada)
+        radio05Game = fragmentSettingsBinding.opCincoJogada.findViewById(R.id.op_cinco_jogada)
+
+        fragmentSettingsBinding.btnCancelSettings.setOnClickListener {
             activity?.supportFragmentManager?.popBackStack()
         }
 
-        btnSave.setOnClickListener {
+        fragmentSettingsBinding.btnSaveSettings.setOnClickListener {
             saveSettings()
             activity?.supportFragmentManager?.popBackStack()
         }
 
-        return root
+        return fragmentSettingsBinding.root
     }
 
     fun saveSettings() {
         val jogadores = checkNumJogadores()
         val rodadas = checkNumRodadas()
+        Log.i("JOGO", "Jogadores - $jogadores | Rodadas - $rodadas")
     }
 
     fun checkNumJogadores(): Int {

@@ -4,18 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import br.edu.ifsp.pedrapapeltesourafragments.Opcoes
 import br.edu.ifsp.pedrapapeltesourafragments.R
+import br.edu.ifsp.pedrapapeltesourafragments.databinding.FragmentMainBinding
 import br.edu.ifsp.pedrapapeltesourafragments.options.OpcaoDoisJogadores
 import br.edu.ifsp.pedrapapeltesourafragments.options.OpcaoTresJogadores
 import java.util.*
 
 class MainFragment : Fragment() {
 
+    private lateinit var imgPlay01: ImageView
+    private lateinit var imgPlay02: ImageView
+    private lateinit var result: TextView
     val op3 = OpcaoTresJogadores()
     val op2 = OpcaoDoisJogadores()
     var resultadoSB: StringBuilder? = null
@@ -24,43 +27,30 @@ class MainFragment : Fragment() {
     var imgJogadaPC2 = -1
     var jogadorSelecionado = 3
 
-    /**
-     * Componentes View
-     */
-    private lateinit var root: View
-    private lateinit var btnPedra: ImageButton
-    private lateinit var btnPapel: ImageButton
-    private lateinit var btnTesoura: ImageButton
-    private lateinit var imgPlay01: ImageView
-    private lateinit var imgPlay02: ImageView
-    private lateinit var result: TextView
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        root = inflater.inflate(R.layout.fragment_main, container, false)
 
-        btnPapel = root.findViewById(R.id.papelBT)
-        btnPedra = root.findViewById(R.id.pedraBT)
-        btnTesoura = root.findViewById(R.id.tesouraBT)
-        imgPlay01 = root.findViewById(R.id.jogadaComputador01Img)
-        imgPlay02 = root.findViewById(R.id.jogadaComputador02Img)
-        result = root.findViewById(R.id.resultado)
+        val fragmentMainBinding = FragmentMainBinding.inflate(inflater, container, false)
 
-        btnPedra.setOnClickListener {
+        imgPlay01 = fragmentMainBinding.jogadaComputador01Img.findViewById(R.id.jogadaComputador01Img)
+        imgPlay02 = fragmentMainBinding.jogadaComputador02Img.findViewById(R.id.jogadaComputador02Img)
+        result = fragmentMainBinding.resultado.findViewById(R.id.resultado)
+
+        fragmentMainBinding.pedraBT.setOnClickListener {
             startGame(Opcoes.PEDRA)
         }
 
-        btnPapel.setOnClickListener {
+        fragmentMainBinding.papelBT.setOnClickListener {
             startGame(Opcoes.PAPEL)
         }
 
-        btnTesoura.setOnClickListener {
+        fragmentMainBinding.tesouraBT.setOnClickListener {
             startGame(Opcoes.TESOURA)
         }
 
-        return root
+        return fragmentMainBinding.root
     }
 
     private fun startGame(jogada: Opcoes) {
@@ -96,15 +86,14 @@ class MainFragment : Fragment() {
             }
             result()
         }
-
     }
 
     private fun result() {
         if (jogadorSelecionado == 2) {
-            result.setText(resultadoSB.toString())
+            result.text = resultadoSB.toString()
             imgPlay01.setImageResource(imgJogadaPC)
         } else {
-            result.setText(resultadoSB.toString())
+            result.text = resultadoSB.toString()
             imgPlay01.setImageResource(imgJogadaPC)
             imgPlay02.setImageResource(imgJogadaPC2)
         }
